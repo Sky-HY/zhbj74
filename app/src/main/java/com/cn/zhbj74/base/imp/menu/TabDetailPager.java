@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -52,6 +54,7 @@ public class TabDetailPager {
     private CirclePageIndicator indicator;
     private RecyclerView rv_newslist;
     private View pager_top_news;
+    private SwipeRefreshLayout sr_refresh;
 
     public TabDetailPager(Activity activity, NewsMenu.NewsTabData tabData) {
         mActivity = activity;
@@ -65,6 +68,8 @@ public class TabDetailPager {
         // 列表新闻
         view = LayoutInflater.from(mActivity).inflate(R.layout.pager_tab_detail, null, false);
         rv_newslist = view.findViewById(R.id.rv_newslist);
+        // 下拉刷新控件
+        sr_refresh = view.findViewById(R.id.sr_refresh);
         // 头条新闻
         pager_top_news = LayoutInflater.from(mActivity).inflate(R.layout.pager_top_news, null, false);
         tv_title = pager_top_news.findViewById(R.id.tv_title);
@@ -101,6 +106,14 @@ public class TabDetailPager {
                 }
             }
         }
+
+        sr_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDataFromServer();// 重新获取服务器数据
+                sr_refresh.setRefreshing(false);//取消刷新
+            }
+        });
     }
 
     /**
@@ -148,7 +161,6 @@ public class TabDetailPager {
 
     /**
      * 解析json数据
-     *
      */
     private void processData(String result) {
         Gson gson = new Gson();
@@ -166,10 +178,12 @@ public class TabDetailPager {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
+
             @Override
             public void onPageSelected(int position) {
                 tv_title.setText(mNewsTabBean.data.topnews.get(position).title);
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
             }
