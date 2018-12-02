@@ -191,13 +191,14 @@ public class TabDetailPager {
 
 
         // RecyclerView适配器
-        MyRecyclerViewAdapter recyclerViewAdapter = new MyRecyclerViewAdapter(mNewsTabBean.data.news);
+        MyRecyclerViewAdapter recyclerViewAdapter = new MyRecyclerViewAdapter(mNewsTabBean.data.news,mActivity);
         // layoutManager
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         rv_newslist.setLayoutManager(manager);
         rv_newslist.setAdapter(recyclerViewAdapter);
         // 给RecyclerView数据适配器设置头布局
         recyclerViewAdapter.setHeadView(pager_top_news);
+
     }
 
     // ViewPager数据适配器

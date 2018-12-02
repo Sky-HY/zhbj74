@@ -3,6 +3,7 @@
     package="com.cn.zhbj74">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".utils.MyApplication"
         android:allowBackup="true"
@@ -22,6 +23,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.PageIndicatorDefaults" />
+        <activity android:name=".NewsDetailActivity" />
     </application>
 
 </manifest>
