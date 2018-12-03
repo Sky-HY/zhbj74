@@ -34,13 +34,13 @@
 
     <LinearLayout
         android:id="@+id/ll_ctrl"
-        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="invisible">
 
         <ImageButton
             android:id="@+id/ib_textsize"
@@ -58,5 +58,18 @@
             android:padding="5dp"
             android:src="@drawable/icon_share" />
 
+
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ib_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@null"
+        android:padding="5dp"
+        android:src="@drawable/icon_pic_grid_type"
+        android:visibility="gone" />
 </RelativeLayout>

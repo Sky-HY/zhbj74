@@ -2,6 +2,8 @@ package com.cn.zhbj74.base.imp.menu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,7 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cn.zhbj74.R;
-import com.cn.zhbj74.domain.MyRecyclerViewAdapter;
+import com.cn.zhbj74.domain.TabDetailRecyclerViewAdapter;
 import com.cn.zhbj74.domain.NewsMenu;
 import com.cn.zhbj74.domain.NewsTabBean;
 import com.cn.zhbj74.global.ConstanValues;
@@ -55,6 +57,9 @@ public class TabDetailPager {
     private RecyclerView rv_newslist;
     private View pager_top_news;
     private SwipeRefreshLayout sr_refresh;
+
+    // hander用来给头条新闻的ViewPager设置自动轮播
+    private Handler mHandler;
 
     public TabDetailPager(Activity activity, NewsMenu.NewsTabData tabData) {
         mActivity = activity;
@@ -189,9 +194,47 @@ public class TabDetailPager {
             }
         });
 
+        // 设置ViewPager轮播
+        if (mHandler == null) {
+            mHandler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    int currentItem = vp_top_news.getCurrentItem();
+                    currentItem++;
+                    if (currentItem > mNewsTabBean.data.topnews.size() - 1) {
+                        currentItem = 0;
+                    }
+                    vp_top_news.setCurrentItem(currentItem);
+
+                    mHandler.sendEmptyMessageDelayed(0, 3000);
+                }
+            };
+            mHandler.sendEmptyMessageDelayed(0, 3000);
+
+            // 当ViewPgaer触摸时，不让它自动轮播
+            vp_top_news.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            // 删除所有消息
+                            mHandler.removeCallbacksAndMessages(null);
+                            break;
+                        case MotionEvent.ACTION_CANCEL:
+                            mHandler.sendEmptyMessageDelayed(0, 3000);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            mHandler.sendEmptyMessageDelayed(0, 3000);
+                            break;
+                    }
+                    return false;
+                }
+            });
+        }
+
 
         // RecyclerView适配器
-        MyRecyclerViewAdapter recyclerViewAdapter = new MyRecyclerViewAdapter(mNewsTabBean.data.news,mActivity);
+        TabDetailRecyclerViewAdapter recyclerViewAdapter = new TabDetailRecyclerViewAdapter(mNewsTabBean.data.news, mActivity);
         // layoutManager
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         rv_newslist.setLayoutManager(manager);

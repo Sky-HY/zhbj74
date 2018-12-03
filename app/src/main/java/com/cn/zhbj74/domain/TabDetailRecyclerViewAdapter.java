@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.cn.zhbj74.NewsDetailActivity;
 import com.cn.zhbj74.R;
-import com.cn.zhbj74.utils.LogUtil;
 import com.cn.zhbj74.utils.MyApplication;
 import com.cn.zhbj74.utils.SpUtils;
 
@@ -23,8 +21,8 @@ import java.util.ArrayList;
 /**
  * RecyclerView Adapter
  */
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
-    private static final String TAG = "MyRecyclerViewAdapter";
+public class TabDetailRecyclerViewAdapter extends RecyclerView.Adapter<TabDetailRecyclerViewAdapter.ViewHolder> {
+    private static final String TAG = "TabDetailRecyclerViewAdapter";
     public static final int TYPE_HEAD = 1;
     public static final int TYPE_NORMAL = 0;
 
@@ -32,7 +30,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private View mHeadView;
     private Activity mActivity;
 
-    public MyRecyclerViewAdapter(ArrayList<NewsTabBean.NewsData> news, Activity activity) {
+    public TabDetailRecyclerViewAdapter(ArrayList<NewsTabBean.NewsData> news, Activity activity) {
         mNewsLists = news;
         mActivity = activity;
     }

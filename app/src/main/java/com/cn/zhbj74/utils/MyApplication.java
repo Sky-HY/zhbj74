@@ -15,6 +15,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        // 注入shareSDK
         MobSDK.init(this);
     }
 

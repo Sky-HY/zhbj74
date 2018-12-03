@@ -162,7 +162,7 @@ public class NewsPager extends BasePager {
         // 将数据也传递给新闻标签子页
         mMenuDetailPagers.add(new NewsMenuDetailPager(mActivity, mNewsData.data.get(0).children));
         mMenuDetailPagers.add(new TopicMenuDetailPager(mActivity));
-        mMenuDetailPagers.add(new PhotosMenuDetailPager(mActivity));
+        mMenuDetailPagers.add(new PhotosMenuDetailPager(mActivity, ib_list));
         mMenuDetailPagers.add(new InteractMenuDetailPager(mActivity));
 
         // 初始设置第一个标签被选中(新闻标签)

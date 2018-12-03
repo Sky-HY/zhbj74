@@ -16,4 +16,6 @@ public class ConstanValues {
      * 服务器json数据URL
      */
     public static final String CATEGORY_URL = SERVER_URL + "/categories.json";
+
+    public static final String PHOTO_URL = SERVER_URL+"/photos/photos_1.json";
 }

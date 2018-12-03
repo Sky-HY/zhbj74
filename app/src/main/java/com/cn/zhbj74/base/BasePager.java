@@ -19,10 +19,9 @@ public abstract class BasePager {
     public View mRootView;
     public FrameLayout fl_content;
     public TextView tv_title;
-    public ImageButton ib_menu;
+    public ImageButton ib_menu,ib_list;
     // MainActivity的DrawerLayout
     private DrawerLayout dl_root;
-
     public BasePager(Activity mActivity) {
         this.mActivity = mActivity;
         initUI();
@@ -34,6 +33,9 @@ public abstract class BasePager {
         tv_title = mRootView.findViewById(R.id.tv_title);
         ib_menu = mRootView.findViewById(R.id.ib_menu);
         dl_root = mActivity.findViewById(R.id.dl_root);
+        ib_list = mRootView.findViewById(R.id.ib_list);
+
+
         // menu键设置点击事件
         ib_menu.setOnClickListener(new View.OnClickListener() {
             @Override
