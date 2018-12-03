@@ -3,6 +3,8 @@ package com.cn.zhbj74.utils;
 import android.app.Application;
 import android.content.Context;
 
+import com.mob.MobSDK;
+
 /**
  * 获取上下文
  */
@@ -13,6 +15,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        MobSDK.init(this);
     }
 
     /**
