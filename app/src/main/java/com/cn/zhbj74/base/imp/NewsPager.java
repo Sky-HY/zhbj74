@@ -186,6 +186,5 @@ public class NewsPager extends BasePager {
         tv_title.setText(title);
         // 设置当前专题的选中索引
         mCurrentMenuDetailPagersPosition = position;
-
     }
 }

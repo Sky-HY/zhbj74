@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cn.zhbj74.R;
+import com.cn.zhbj74.utils.BitmapUtils;
 import com.cn.zhbj74.utils.MyApplication;
 
 import java.util.ArrayList;
@@ -20,8 +21,11 @@ import java.util.ArrayList;
 public class PhotoMenuDetailRecyclerViewAdapter extends RecyclerView.Adapter<PhotoMenuDetailRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<PhotosBean.PhotoNews> mNewsList;
+    private BitmapUtils mBitmapUtils;
+
     public PhotoMenuDetailRecyclerViewAdapter(ArrayList<PhotosBean.PhotoNews> newsList) {
         mNewsList = newsList;
+        mBitmapUtils = new BitmapUtils();
     }
 
     @Override
@@ -34,7 +38,12 @@ public class PhotoMenuDetailRecyclerViewAdapter extends RecyclerView.Adapter<Pho
     public void onBindViewHolder(ViewHolder holder, int position) {
         PhotosBean.PhotoNews photoNews = mNewsList.get(position);
         // 设置图片
-        Glide.with(MyApplication.getContext()).load(photoNews.listimage).placeholder(R.drawable.topnews_item_default).error(R.drawable.topnews_item_default).into(holder.iv_photo);
+        // Glide.with(MyApplication.getContext()).load(photoNews.listimage).placeholder(R.drawable.topnews_item_default).error(R.drawable.topnews_item_default).into(holder.iv_photo);
+        // 自定义图片3级缓存机制
+
+        // 设置标记,将该imageView与url地址绑定在一起
+        holder.iv_photo.setTag(photoNews.listimage);
+        mBitmapUtils.display(photoNews.listimage, holder.iv_photo);
         holder.tv_title.setText(photoNews.title);
     }
 

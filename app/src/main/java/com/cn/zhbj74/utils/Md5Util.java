@@ -1,5 +1,7 @@
 package com.cn.zhbj74.utils;
 
+import android.support.annotation.NonNull;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -14,7 +16,7 @@ public class Md5Util {
 	/**给指定字符串按照md5算法去加密
 	 * @param psd	需要加密的密码
 	 */
-	public static String encoder(String psd) {
+	public static String encoder(@NonNull String psd) {
 		try {
 			//1,指定加密算法类型
 			MessageDigest digest = MessageDigest.getInstance("MD5");
