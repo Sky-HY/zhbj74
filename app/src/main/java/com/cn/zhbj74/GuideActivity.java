@@ -14,9 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.cn.zhbj74.global.ConstanValues;
+import com.cn.zhbj74.utils.DensityUtils;
 import com.cn.zhbj74.utils.LogUtil;
 import com.cn.zhbj74.utils.MyApplication;
 import com.cn.zhbj74.utils.SpUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +101,8 @@ public class GuideActivity extends AppCompatActivity {
             point.setImageResource(R.drawable.shape_point_gray);
             if (i > 0) {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.leftMargin = 25;
+                // 屏幕适配
+                params.leftMargin = DensityUtils.dpi2px(10, this);
                 point.setLayoutParams(params);
             }
             ll_container.addView(point);
@@ -147,5 +150,18 @@ public class GuideActivity extends AppCompatActivity {
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
+    }
+
+    // 统计sdk
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

@@ -186,5 +186,11 @@ public class NewsPager extends BasePager {
         tv_title.setText(title);
         // 设置当前专题的选中索引
         mCurrentMenuDetailPagersPosition = position;
+
+        if (pager instanceof PhotosMenuDetailPager){
+            ib_list.setVisibility(View.VISIBLE);
+        }else{
+            ib_list.setVisibility(View.GONE);
+        }
     }
 }

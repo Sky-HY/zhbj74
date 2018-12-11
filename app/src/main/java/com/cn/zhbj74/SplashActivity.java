@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import com.cn.zhbj74.global.ConstanValues;
 import com.cn.zhbj74.utils.MyApplication;
 import com.cn.zhbj74.utils.SpUtils;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Splash界面
@@ -102,5 +103,18 @@ public class SplashActivity extends AppCompatActivity {
      */
     private void initUI() {
         rl_root = findViewById(R.id.rl_root);
+    }
+
+    // 统计sdk
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.cn.zhbj74.utils.LogUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
@@ -166,5 +167,18 @@ public class NewsDetailActivity extends AppCompatActivity implements View.OnClic
         //oks.setComment("我是测试评论文本");
         // 启动分享GUI
         oks.show(this);
+    }
+
+    // 统计sdk
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

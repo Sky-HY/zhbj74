@@ -35,6 +35,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'org.jetbrains:annotations-java5:15.0'
+
+    implementation  'com.umeng.umsdk:analytics:7.5.4'
+    implementation  'com.umeng.umsdk:common:1.5.4'
+
 }
 
 

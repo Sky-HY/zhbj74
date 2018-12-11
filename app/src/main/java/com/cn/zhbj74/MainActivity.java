@@ -10,13 +10,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Window;
 import android.widget.Toast;
 
 import com.cn.zhbj74.base.imp.menu.NewsMenuDetailPager;
 import com.cn.zhbj74.fragment.ContentFragment;
 import com.cn.zhbj74.fragment.LeftMenuFragment;
 import com.cn.zhbj74.utils.ToastUtils;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 主页面
@@ -79,5 +79,18 @@ public class MainActivity extends FragmentActivity {
         super.onDestroy();
         // 让新闻专题的标签页索引置零
         NewsMenuDetailPager.mCurrentPagerItemId = 0;
+    }
+
+    // 统计sdk
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
